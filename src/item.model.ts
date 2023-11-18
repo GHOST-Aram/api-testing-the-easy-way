@@ -1,6 +1,6 @@
 import mongoose, { HydratedDocument } from "mongoose"
 
-interface IItem{
+export interface IItem{
     title: string
     pages: number
 }

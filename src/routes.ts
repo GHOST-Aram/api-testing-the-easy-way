@@ -1,10 +1,14 @@
 import { Router } from "express";
-import { home, index } from "./controller";
+import { APIController} from "./controller";
 
-const router = Router()
-
-router.get('/home', home)
-
-router.get('/', index)
-
-export {router}
+const apiRouter = (controller: APIController) => {
+    const router = Router()
+    router.post('/item', controller.addNewItem)
+    
+    router.get('/home', controller.home)
+    
+    router.get('/', controller.index)
+    
+    return router
+}
+export {apiRouter}

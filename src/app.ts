@@ -1,9 +1,13 @@
 import express from "express"
-import { router } from "./routes"
+import { apiRouter } from "./routes"
+import { APIController } from "./controller"
+import { APIDAL } from "./data-access"
 
+const apiDAL = new APIDAL()
+const controller = new APIController(apiDAL)
 const api = express()
 
 api.use(express.urlencoded({ extended: true }))
 api.use(express.json())
 
-api.use( router)
+api.use( apiRouter(controller))
