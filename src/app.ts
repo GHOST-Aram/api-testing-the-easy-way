@@ -1,10 +1,9 @@
 import express from "express"
+import { router } from "./routes"
 
 const api = express()
 
 api.use(express.urlencoded({ extended: true }))
 api.use(express.json())
 
-api.get('/', (req, res) =>{
-    res.status(200).json({message: 'Welcome to my API'})
-})
+api.use( router)
