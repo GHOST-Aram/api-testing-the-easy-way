@@ -4,7 +4,7 @@ import express from "express"
 
 import { apiRouter } from "./routes"
 import { APIController } from "./controller"
-import { APIDAL } from "./data-access"
+import { APIDAL } from "./mocks/data-access"
 
 const apiDAL = new APIDAL()
 const controller = new APIController(apiDAL)
@@ -18,7 +18,7 @@ api.use( apiRouter(controller))
 describe('POST item', () =>{
     test('Responds with json content', async() =>{
         const response = await request(api).post('/item')
-            .send({ title : 'The Book Of Scretes', page: '800'})
+            .send({ title : 'The Book Of Scretes', pages: 800})
 
         expect(response.headers['content-type']).toMatch(/json/)
     })
@@ -32,10 +32,10 @@ describe('POST item', () =>{
 
     test('Responds with saved document', async() =>{
         const response = await request(api).post('/item')
-            .send({ title : 'The Book Of Scretes', page: '800'})
+            .send({ title : 'The Book Of Secretes', pages: 800})
 
         expect(response.body).toHaveProperty('item')
-        expect(response.body.item).toHaveProperty('__id')
+        expect(response.body.item).toHaveProperty('_id')
         expect(response.body.item.title).toMatch(/the book of secretes/i)
         expect(response.body.item.pages).toEqual(800)
     })

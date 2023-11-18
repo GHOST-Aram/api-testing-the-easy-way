@@ -8,5 +8,13 @@ export class APIDAL{
         })
     
         const savedItem = await item.save()
+
+        return ({
+            title: savedItem.title,
+            pages: savedItem.pages,
+            _id: savedItem._id,
+            id: savedItem.id
+
+        })
     }
 }
